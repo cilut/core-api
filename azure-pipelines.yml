@@ -1,0 +1,47 @@
+# Gradle
+# Build your Java project and run tests with Gradle using a Gradle wrapper script.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+# - bash: 'wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz '
+#   displayName: 'Bash Script'
+
+# - task: JavaToolInstaller@0
+#   displayName: 'Use Java 21'
+#   inputs:
+#     versionSpec: 21
+#     jdkArchitectureOption: x64
+#     jdkSourceOption: LocalDirectory
+#     jdkFile: '$(build.sourcesdirectory)/jdk-21_linux-x64_bin.tar.gz'
+#     jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk21'
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       # Write your commands here
+#       ./gradlew build
+- task: Gradle@3
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'build'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    sonarQubeRunAnalysis: false
+    spotBugsAnalysis: false
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'ACR AgentRunners'
+    repository: 'azp-agent/linux'
+    command: 'buildAndPush'
+    Dockerfile: '**/dev.dockerfile'
+    tags: 'latest'
