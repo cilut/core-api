@@ -1,6 +1,6 @@
 # Food Delivery Backend
 
-# Live link🚀 - https://food-delivery23.netlify.app/
+# Live link🚀 - 
 
 This is the backend REST API of a food delivery application, which allows users to order food. It is built using Java with Spring Boot, and incorporates several technologies and features to provide a seamless food ordering experience.
 
@@ -42,7 +42,7 @@ This is the backend REST API of a food delivery application, which allows users 
 
 ### Frontend:
 
-- Angular (link🚀 - https://github.com/iamkhs/core-api-front-end)
+- Angular (link🚀 - https://github.com/cilut/front-core-api)
 
 ## Configuration:
 
