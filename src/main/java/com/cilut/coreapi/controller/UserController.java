@@ -33,6 +33,11 @@ public class UserController {
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
 
+    @GetMapping("/test")
+    public ResponseEntity<?> test(){
+        return new ResponseEntity<>("test", HttpStatus.OK);
+    }
+
     /**
      * Save user information and send verification email
      *
